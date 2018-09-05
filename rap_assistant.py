@@ -38,6 +38,7 @@ class RapAssistant:
 
         return words
 
+
     def find_rhymes(self, word_bag=None, num_rhymes=10):
         """
         Accepts list of words or word as parameter, returns dictionary of words and rhymes.
@@ -57,13 +58,19 @@ class RapAssistant:
 
         return self.rhyme_dict
 
+
     def show_pretty_rhyme_dict(self):
+        """
+        Pretty prints rhyme dictionary.
+        """
         if len(self.rhyme_dict) > 0:
             pprint.pprint(self.rhyme_dict)
         else:
             print('Rhyme dictionary contains no words.')
      
+
 if __name__ == '__main__':
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-w', '--word', type=str)
     parser.add_argument('-u', '--urban', action='store_true')
@@ -79,5 +86,3 @@ if __name__ == '__main__':
         words = rapper.urban_bag()
         rapper.find_rhymes(word_bag=words, num_rhymes=3)
         rapper.show_pretty_rhyme_dict()
-        
-
