@@ -5,5 +5,4 @@ Tool for new words and rhymes.
 ```
 python rapAssistant.py -w boat
 python rapAssitant.py --urban
-
 ```
