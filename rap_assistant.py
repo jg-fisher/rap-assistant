@@ -3,6 +3,7 @@ import urbandictionary
 import pronouncing
 import pprint
 import argparse
+import sys
 
 class RapAssistant:
 
@@ -13,7 +14,7 @@ class RapAssistant:
 
     def _parse(self, words):
         """
-        Split two-word-phrases.
+        Split twoword-phrases.
         """
         
         post_parse = []
@@ -52,6 +53,7 @@ class RapAssistant:
                 if len(rhymes) > num_rhymes:
                     self.rhyme_dict[word] = [random.choice(rhymes) for _ in range(num_rhymes)]
                 else:
+                    print('Max rhyme capacity reached.')
                     self.rhyme_dict[word] = rhymes
         else:
             self.rhyme_dict[word_bag] = pronouncing.rhymes(word_bag)[:num_rhymes]
@@ -72,17 +74,25 @@ class RapAssistant:
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('-n', '--numrhymes', type=int)
     parser.add_argument('-w', '--word', type=str)
     parser.add_argument('-u', '--urban', action='store_true')
     args = vars(parser.parse_args())
 
     rapper = RapAssistant()
 
+    if args and args['numrhymes'] and args['word']:
+        rapper.find_rhymes(word_bag=args['word'], num_rhymes=args['numrhymes'])
+        rapper.show_pretty_rhyme_dict()
+        sys.exit()
+
     if args and args['word']:
         rapper.find_rhymes(word_bag=args['word'], num_rhymes=3)
         rapper.show_pretty_rhyme_dict()
+        sys.exit()
 
     if args and args['urban']:
         words = rapper.urban_bag()
         rapper.find_rhymes(word_bag=words, num_rhymes=3)
         rapper.show_pretty_rhyme_dict()
+        sys.exit()
