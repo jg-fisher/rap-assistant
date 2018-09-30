@@ -13,6 +13,6 @@ $ pip install -r requirements.txt
 
 ### Usage:
 ```
-$ python rapAssistant.py -w boat
+$ python rapAssistant.py -w boat -n 5
 $ python rapAssitant.py --urban
 ```
